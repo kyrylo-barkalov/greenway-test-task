@@ -1,0 +1,15 @@
+.DS_Store
+.idea/
+.venv*/
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Terraform
+terraform/.terraform/
+terraform/terraform.tfstate
+terraform/terraform.tfstate.backup
+
+# Lambda build artifacts
+lambda/*.zip
