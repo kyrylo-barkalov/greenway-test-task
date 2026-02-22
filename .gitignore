@@ -8,8 +8,15 @@ __pycache__/
 
 # Terraform
 terraform/.terraform/
+terraform/.terraform.lock.hcl
 terraform/terraform.tfstate
 terraform/terraform.tfstate.backup
+terraform/local.auto.tfvars
 
 # Lambda build artifacts
-lambda/*.zip
+src/lambda/*.zip
+
+# Local Spark outputs
+data/processed/
+*.crc
+_SUCCESS

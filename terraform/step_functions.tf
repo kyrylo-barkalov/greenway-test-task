@@ -21,7 +21,7 @@ resource "aws_sfn_state_machine" "csv_row_counter" {
           ExecutionRoleArn = aws_iam_role.emr_serverless_exec.arn
           JobDriver = {
             SparkSubmit = {
-              EntryPoint = "s3://${aws_s3_bucket.csv_uploads.bucket}/${aws_s3_object.emr_count_csv_rows.key}"
+              EntryPoint              = "s3://${aws_s3_bucket.csv_uploads.bucket}/${aws_s3_object.emr_count_csv_rows.key}"
               "EntryPointArguments.$" = "States.Array(States.Format('s3://{}/{}', $.bucket, $.key))"
             }
           }

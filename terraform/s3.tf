@@ -1,7 +1,8 @@
 data "aws_caller_identity" "current" {}
 
 locals {
-  bucket_name = "${var.project_name}-${var.environment}-csv-uploads"
+  bucket_name         = "${var.project_name}-${var.environment}-csv-uploads"
+  emr_entrypoint_file = "${path.module}/../src/emr/count_csv_rows.py"
 }
 
 resource "aws_s3_bucket" "csv_uploads" {
@@ -24,6 +25,6 @@ resource "aws_s3_bucket_notification" "csv_uploads_trigger" {
 resource "aws_s3_object" "emr_count_csv_rows" {
   bucket = aws_s3_bucket.csv_uploads.id
   key    = "emr/count_csv_rows.py"
-  source = "${path.module}/../emr/count_csv_rows.py"
-  etag   = filemd5("${path.module}/../emr/count_csv_rows.py")
+  source = local.emr_entrypoint_file
+  etag   = filemd5(local.emr_entrypoint_file)
 }

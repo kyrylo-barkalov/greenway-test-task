@@ -1,11 +1,16 @@
 data "archive_file" "lambda_zip" {
   type        = "zip"
-  source_file = "${path.module}/../lambda/upload_trigger.py"
-  output_path = "${path.module}/../lambda/upload_trigger.zip"
+  source_file = local.lambda_source_file
+  output_path = local.lambda_zip_output_file
 }
 
 locals {
-  lambda_function_name = "${var.project_name}-${var.environment}-csv-uploads-trigger"
+  lambda_source_file     = "${path.module}/../src/lambda/upload_trigger.py"
+  lambda_zip_output_file = "${path.module}/../src/lambda/upload_trigger.zip"
+  lambda_function_name = coalesce(
+    var.lambda_function_name,
+    "${var.project_name}-${var.environment}-csv-uploads-trigger"
+  )
 }
 
 resource "aws_lambda_function" "csv_uploads_trigger" {

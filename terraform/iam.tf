@@ -136,7 +136,7 @@ resource "aws_iam_role" "emr_serverless_exec" {
 
 data "aws_iam_policy_document" "emr_serverless_exec" {
   statement {
-    actions = ["logs:DescribeLogGroups"]
+    actions   = ["logs:DescribeLogGroups"]
     resources = ["*"]
   }
 
